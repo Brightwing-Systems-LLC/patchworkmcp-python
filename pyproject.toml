@@ -1,0 +1,11 @@
+[project]
+name = "patchworkmcp-python"
+version = "0.1.0"
+description = "PatchworkMCP drop-in feedback tool for Python MCP servers"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.24",
+]
+
+[tool.uv]
+dev-dependencies = []
