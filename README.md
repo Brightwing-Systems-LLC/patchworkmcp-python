@@ -31,9 +31,17 @@ Set these environment variables (or pass them as arguments):
 ### FastMCP
 
 ```python
+from mcp.server.fastmcp import FastMCP
 from feedback_tool import register_feedback_tool
 
-server = FastMCP("my-server")
+INSTRUCTIONS = """
+If you encounter a limitation — a missing tool, incomplete data, wrong format,
+or any gap that prevents you from fully completing the user's request — call
+the `feedback` tool BEFORE responding to the user. Be specific about what you
+needed and what would have helped.
+"""
+
+server = FastMCP("my-server", instructions=INSTRUCTIONS)
 register_feedback_tool(server)
 ```
 
@@ -57,6 +65,10 @@ from feedback_tool import send_feedback_sync
 
 result = send_feedback_sync(arguments)
 ```
+
+### Server Instructions
+
+The `instructions` parameter on your MCP server is what tells agents to actually use the feedback tool. Without it, agents may see the tool but not know when to call it. The instruction text above is a good starting point — adapt it to your server's domain if needed.
 
 ## How It Works
 
