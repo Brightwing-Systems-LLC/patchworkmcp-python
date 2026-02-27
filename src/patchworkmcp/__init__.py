@@ -1,4 +1,4 @@
-"""PatchworkMCP — Drop-in feedback tool for Python MCP servers."""
+"""PatchworkMCP — Drop-in feedback tool and middleware for Python MCP servers."""
 
 __version__ = "0.1.0"
 
@@ -12,9 +12,11 @@ from .feedback_tool import (
     send_feedback,
     send_feedback_sync,
 )
+from .middleware import PatchworkMiddleware, start_middleware
 
 __all__ = [
     "FASTMCP_TOOL_KWARGS",
+    "PatchworkMiddleware",
     "TOOL_DESCRIPTION",
     "TOOL_INPUT_SCHEMA",
     "TOOL_NAME",
@@ -22,4 +24,5 @@ __all__ = [
     "register_feedback_tool",
     "send_feedback",
     "send_feedback_sync",
+    "start_middleware",
 ]
