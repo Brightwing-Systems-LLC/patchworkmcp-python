@@ -66,9 +66,20 @@ from feedback_tool import send_feedback_sync
 result = send_feedback_sync(arguments)
 ```
 
-### Server Instructions
+### Server Instructions (Critical)
 
-The `instructions` parameter on your MCP server is what tells agents to actually use the feedback tool. Without it, agents may see the tool but not know when to call it. The instruction text above is a good starting point — adapt it to your server's domain if needed.
+**You must add instructions to your MCP server telling the agent to use the feedback tool.** This is the single most important step in the integration. Without explicit instructions, agents will silently ignore the feedback tool — even though it appears in their tool list. The tool's description alone is not enough to reliably trigger usage.
+
+The `instructions` parameter on your MCP server is the mechanism that tells agents when and how to call the feedback tool. Every MCP server that registers the feedback tool **must** include instructions like the example above. Adapt the wording to your server's domain, but always keep these key points:
+
+1. **Tell the agent it is required.** Agents treat server instructions as authoritative. If you don't say "you must call the feedback tool," they won't.
+2. **Specify when to call it.** List the concrete scenarios: missing tool, incomplete results, wrong format, about to say "not possible," etc.
+3. **Say to call it BEFORE responding.** If the agent responds to the user first, it will rarely circle back to submit feedback.
+4. **Ask for specifics.** Generic feedback like "something was missing" is not actionable. Tell the agent to describe exactly what it needed and what would have helped.
+
+Without these instructions, PatchworkMCP receives no signal about what your server is missing, and you lose the entire feedback loop that drives improvement.
+
+For the full guide on writing effective agent instructions, see [AGENT_INSTRUCTIONS.md](AGENT_INSTRUCTIONS.md).
 
 ## How It Works
 
